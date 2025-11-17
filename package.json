@@ -1,5 +1,5 @@
 {
-  "name": "my-turborepo",
+  "name": "Microservice TCP",
   "private": true,
   "scripts": {
     "build": "turbo run build",
