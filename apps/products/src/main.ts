@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,
+  const productTCPMicroservice = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,
     {
       transport: Transport.TCP,
       options: {
@@ -11,7 +11,17 @@ async function bootstrap() {
       }
     }
   );
-  await app.listen();
-  console.log("Products Service on 4002!")
+  const productRedisMicroservice = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule,
+    {
+      transport: Transport.REDIS,
+      options: {
+        host: "localhost",
+        port: 6379
+      }
+    }
+  )
+
+  Promise.all([productTCPMicroservice.listen(), productRedisMicroservice.listen()])
+  console.log("Products Service on 4002 and redis service running on 6379")
 }
 bootstrap();
