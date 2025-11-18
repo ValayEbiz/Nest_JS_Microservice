@@ -1,6 +1,6 @@
 import { Controller, Get, Inject, Param } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { INTERNAL_SERVICES } from 'src/constants';
+import { INTERNAL_SERVICES } from '../constants';
 
 @Controller('users')
 export class UsersController {
